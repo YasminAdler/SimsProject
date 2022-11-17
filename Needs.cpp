@@ -72,6 +72,15 @@ void Needs::increseNeed(int needNumber, void *secondItem, void *thirdItem)
         break;
     }
 }
+void Needs::printNeeds()
+{
+    cout << "Blader\t" << bladder_cl.get_level() << "\n"
+         << "Hunger\t" << hunger_cl.get_level() << "\n"
+         << "Energy\t" << energy_cl.get_level() << "\n"
+         << "Fun\t" << fun_cl.get_level() << "\n"
+         << "Social" << social_cl.get_level() << "\n"
+         << "Hygiene\t" << hygiene_cl.get_level() << "\n";
+}
 Bladder::Bladder()
 {
 }

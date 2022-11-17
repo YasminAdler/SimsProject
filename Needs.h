@@ -125,7 +125,6 @@ public:
     Needs();
     void life();
     bool CheckIfDead();
-
     /*
    needNumber:
         1 Blader
@@ -146,6 +145,7 @@ public:
             3 PhoneCall
     */
     void increseNeed(int needNumber, void *secondItem = nullptr, void *thirdItem = nullptr);
+    void printNeeds();
 };
 
 #endif

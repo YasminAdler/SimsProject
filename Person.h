@@ -10,13 +10,13 @@ private:
     char *firstName_cl;
     char *lastName_cl;
     Needs needs_cl;
-    Job* job_cl;
+    Job *job_cl;
     int money_cl;
 
 public:
     Person();
     // Person(char *firstName);
-    // Person(char *firstName, char *lastName);
+    Person(char *firstName, char *lastName);
     // Person(char *firstName, char *lastName, Needs* need);
     // Person(char *firstName, char *lastName, Needs* need, Job* job);
 
@@ -44,12 +44,16 @@ public:
             3 PhoneCall
     */
     void increseNeed(int needNumber, void *secondItem = nullptr, void *thirdItem = nullptr
-    
+
     );
 
     char *getFirstName();
     char *getLastName();
 
+    void life();
+    bool CheckIfDead();
+    void printNeeds();
+    // Person &operator<<(Person &Sim);//cant figur this out
     // Needs *getNeeds();
 
     ~Person();

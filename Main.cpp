@@ -7,30 +7,38 @@ using namespace std;
 // {
 //     Person *arry;
 //     int size;
-
 // public:
 //     PersonArray(int size);
 //     PersonArray(Person *arry, int size);
 //     void
 // };
-Person *contactSim(Person *personArray, int numberOfSims, int currentSimID)
+void printSim(Person Sim)
+{
+    static int i = 0;
+    cout << Sim.getFirstName()
+         << " "
+         << Sim.getLastName();
+    cout << i;
+    i++;
+}
+Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
 {
     int choice;
+    Person &currentSim = *personArray;
     do
     {
-        cout << "Who will " << (personArray + currentSimID)->getFirstName() << " socialize with?\n";
+        cout << "Who will " << currentSim.getFirstName() << " socialize with?\n";
         for (int i = 0; i < numberOfSims; i++)
         {
-            if (currentSimID == i)
+            currentSim = *(personArray + currentSimNum);
+            if (currentSimNum == i)
                 continue;
-            cout << i << ". "
-                 << personArray[i].getFirstName()
-                 << " "
-                 << personArray[i].getLastName()
-                 << "\n";
+            cout << i << ". ";
+            printSim(currentSim);
+            cout << "\n";
         }
         cin >> choice;
-        if (choice < 1 || choice > numberOfSims)
+        if (currentSimNum == choice || choice < 1 || choice > numberOfSims)
             cout << "Not a valid option\n";
     } while (choice < 1 || choice > numberOfSims);
     return personArray + choice;
@@ -38,16 +46,17 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimID)
 void choiceSocial(Person *personArray, int numberOfSims)
 {
     int count = 0;
-    int choice;
-    Person *currentSim = personArray,
+    long long choice;
+    Person &currentSim = *personArray,
            *contact;
     // Needs* currentSimNeeds;
     // want to do sompthing like this
     // for (; currentSim != nullptr; currentSim++)
     // current relies on knowing number of sims in PerArr
-    for (int i = 0; i < numberOfSims; i++, currentSim++)
+    for (int i = 0; i < numberOfSims; i++)
     {
-        cout << currentSim->getFirstName();
+        currentSim = *(personArray + i);
+        cout << currentSim.getFirstName();
         cout << count << "\n";
         count++;
         do
@@ -78,10 +87,10 @@ void choiceSocial(Person *personArray, int numberOfSims)
             switch (choice)
             {
             case playAnimal:
-                currentSim->increseNeed(fun, (void *)playAnimal);
+                currentSim.increseNeed(fun, (void *)playAnimal);
                 break;
             default:
-                currentSim->increseNeed(fun, (void *)choice);
+                currentSim.increseNeed(fun, (void *)choice);
                 break;
             }
             break;
@@ -97,17 +106,37 @@ void choiceSocial(Person *personArray, int numberOfSims)
                 if (choice < 1 || choice > 3)
                     cout << "Not a valid option\n";
             } while (choice < 0 || choice > 3);
-            currentSim->increseNeed(5, (void *)choice, (void *)contactSim(personArray, numberOfSims, i));
+            currentSim.increseNeed(5, (void *)choice, (void *)contactSim(personArray, numberOfSims, i));
             break;
         default:
-            currentSim->increseNeed(choice);
+            currentSim.increseNeed(choice);
             break;
         }
     }
     return;
 }
-void life()
+void life(Person *simArray, int simArraySize)
 {
+    Person t{};
+    Person &currentSim{t};
+    for (int i = 0; i < simArraySize; i++)
+    {
+        currentSim = *(simArray + i);
+        currentSim.life();
+
+        if (currentSim.CheckIfDead())
+        {
+            printSim(currentSim);
+            cout << " is dead!\n";
+        }
+        else
+        {
+            printSim(currentSim);
+            cout << "\n";
+            currentSim.printNeeds();
+        }
+    }
+        cout<<__LINE__<<"here\n";
 
 }
 
@@ -120,14 +149,21 @@ int main()
     // 1 constroctor Person::Person(char*,char*)
     // 2 PerArr details
     // 3 choiseSocial function call
-    // Person PerArr[]{{"nam", ""},
-    //                 {"dd", "uu"},
-    //                 {"Dextor", "Labratory"},
-    //                 {"Frank", "Sanotra"}};
+    Person PerArr[]{{"nam", "n"},
+                    {"dd", "uu"},
+                    {"Dextor", "Labratory"},
+                    {"Frank", "Sanotra"}};
+    for (int i = 0; i < 10; i++)
+    {
+        life(PerArr, 4);
+        cout<<__LINE__<<"here\n";
+    }
+    return 0;
     // choiceSocial(PerArr, 4);
     // till here for testin
     // when finished testing uncomment below
-    Person PerArr[8];
+    // Person PerArr[8];
+    // till here
     int numberOfSims = 0;
     int JobChoise = 0;
     char buff[20] = {'\0'};
@@ -148,7 +184,7 @@ int main()
     jobs[4].setJobDaylyWorkHours(2);
     jobs[4].setJobSalary(300);
     Job TempJob;
-    int i = 0;
+    int simCounter = 0;
 
     while (choice != 0)
     {
@@ -169,18 +205,18 @@ int main()
             buff[0] = {'\0'};
             cout << "Enter the person's first name: \n";
             cin >> buff;
-            PerArr[i].setFirstName(buff);
+            PerArr[simCounter].setFirstName(buff);
             buff[0] = {'\0'};
             cout << "Enter the person's last name: \n";
             cin >> buff;
-            PerArr[i].setLastName(buff);
+            PerArr[simCounter].setLastName(buff);
             buff[0] = '\0';
-            strcpy(buff, PerArr[i].getFirstName());
+            strcpy(buff, PerArr[simCounter].getFirstName());
             cout << buff << " ";
             buff[0] = '\0';
-            strcpy(buff, PerArr[i].getLastName());
+            strcpy(buff, PerArr[simCounter].getLastName());
             cout << buff << " was added \n\n";
-            i++;
+            simCounter++;
             // setting that person's job:
 
             cout << "choose a job:\n";
@@ -192,28 +228,27 @@ int main()
             }
             cin >> JobChoise;
             TempJob = jobs[JobChoise];
-            PerArr[i].setJob(TempJob);
+            PerArr[simCounter].setJob(TempJob);
             buff[0] = '\0';
 
             strcpy(buff, TempJob.getJobTitle());
             cout << "Chosen: " << buff << "\n";
 
-            i++;
+            simCounter++;
 
             break;
         case 2:
-            if (i == 0)
+            if (simCounter == 0)
             {
                 cout << "There are no sims";
             }
-            // PerArr[i].~Person();
-            
+            // PerArr[simCounter].~Person();
 
             break;
         case 3:
             // option 3 output
             choiceSocial(PerArr, numberOfSims);
-            life();
+            life(PerArr, simCounter);
         default:
             break;
         }

@@ -6,19 +6,21 @@ using namespace std;
 Person::Person()
 {
 }
+
 // Person::Person(char *firstName)
 // {
 //     firstName_cl = new char(strlen(firstName) + 1);
 //     strcpy(firstName_cl, firstName);
 // }
-// Person::Person(char *firstName, char *lastName)
-// {
-//     firstName_cl = new char(strlen(firstName) + 1);
-//     strcpy(firstName_cl, firstName);
 
-//     lastName_cl = new char(strlen(lastName) + 1);
-//     strcpy(lastName_cl, lastName);
-// }
+Person::Person(char *firstName, char *lastName)
+{
+    firstName_cl = new char(strlen(firstName) + 1);
+    strcpy(firstName_cl, firstName);
+    lastName_cl = new char(strlen(lastName) + 1);
+    strcpy(lastName_cl, lastName);
+}
+
 // Person::Person(char *firstName, char *lastName, Needs* need)
 // {
 //     firstName_cl = new char(strlen(firstName) + 1);
@@ -28,6 +30,7 @@ Person::Person()
 //     strcpy(lastName_cl, lastName);
 //     needs_cl = need;
 // }
+
 // Person::Person(char *firstName, char *lastName, Needs* need, Job* job) {
 //         firstName_cl = new char(strlen(firstName) + 1);
 //     strcpy(firstName_cl, firstName);
@@ -65,15 +68,28 @@ void Person::increseNeed(int needNumber, void *secondItem, void *thirdItem)
 // Needs *Person::getNeeds()
 // {
 //    return &needs_cl;
-// 
+//
 void Person::setJob(Job job)
 {
     job_cl = new Job[sizeof(job)];
     job_cl = &job;
     job_cl->setJobTitle(job.getJobTitle());
 }
+void Person::life()
+{
+    needs_cl.life();
+}
+bool Person::CheckIfDead()
+{
+    return needs_cl.CheckIfDead();
+}
+void Person::printNeeds()
+{
+    needs_cl.printNeeds();
+}
 Person::~Person()
 {
     delete[] firstName_cl;
     delete[] lastName_cl;
+    // delete[] job_cl; 
 }
