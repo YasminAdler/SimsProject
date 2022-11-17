@@ -108,6 +108,7 @@ void choiceSocial(Person *personArray, int numberOfSims)
 }
 void life()
 {
+
 }
 
 int main()
@@ -212,7 +213,7 @@ int main()
         case 3:
             // option 3 output
             choiceSocial(PerArr, numberOfSims);
-
+            life();
         default:
             break;
         }
