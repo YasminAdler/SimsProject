@@ -205,7 +205,8 @@ int main()
             {
                 cout << "There are no sims";
             }
-            // PerArr[i].~Person();
+            PerArr[i].~Person();
+            
             
 
             break;

@@ -74,6 +74,7 @@ void Person::setJob(Job job)
 }
 Person::~Person()
 {
+    // delete needs_cl;
     delete[] firstName_cl;
     delete[] lastName_cl;
 }
