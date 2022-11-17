@@ -1,0 +1,30 @@
+run: prog
+	./prog
+prog: Animal.o Bladder.o Energy.o Food.o Fun.o Hunger.o Hygiene.o Job.o Main.cpp Needs.o Person.o Social.o
+	gcc Animal.o Bladder.o Energy.o Food.o Fun.o Hunger.o Hygiene.o Job.o Main.cpp Needs.o Person.o Social.o -o prog
+Animal.o: Animal.cpp	Animal.h
+	gcc -c Animal.cpp -o Animal.o
+Bladder.o: Bladder.cpp Bladder.h 
+	gcc -c Bladder.cpp -o Bladder.o
+Energy.o: Energy.cpp	Energy.h
+	gcc	-c	Energy.cpp	-o	Energy.o
+Food.o:	Food.c Food.h 
+	gcc	-c Food.cpp	-o Food.o
+Fun.o: Fun.cpp Fun.h Animal.h
+	gcc	-c Fun.cpp -o	Fun.o
+Hunger.o: Hunger.cpp Hunger.h Food.h
+	gcc	-c Hunger.cpp -o	Hunger.o
+Hygiene.o: Hygiene.cpp Hygiene.h
+	gcc	-c Hygiene.cpp -o	Hygiene.o
+Job.o: Job.cpp Job.h
+	gcc	-c Job.cpp -o	Job.o
+Needs.o: Needs.cpp Needs.h Bladder.h Energy.h Hunger.h Fun.h Social.h Hygiene.h
+	gcc	-c Needs.cpp -o Needs.o
+Person.o: Person.cpp Person.h Needs.h Job.h
+	gcc	-c Person.cpp -o	Person.o
+Social.o: Social.cpp Social.h Person.h
+	gcc	-c Social.cpp -o	Social.o
+Main.o: Main.cpp
+	gcc	-c Main.cpp
+clean:
+	del *.o	prog
