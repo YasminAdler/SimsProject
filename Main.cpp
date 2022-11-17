@@ -108,6 +108,7 @@ void choiceSocial(Person *personArray, int numberOfSims)
 }
 void life()
 {
+    
 }
 
 int main()
