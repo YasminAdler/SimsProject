@@ -136,8 +136,7 @@ void life(Person *simArray, int simArraySize)
             currentSim.printNeeds();
         }
     }
-        cout<<__LINE__<<"here\n";
-
+    cout << __LINE__ << "here\n";
 }
 
 int main()
@@ -149,25 +148,28 @@ int main()
     // 1 constroctor Person::Person(char*,char*)
     // 2 PerArr details
     // 3 choiseSocial function call
-    Person PerArr[]{{"nam", "n"},
-                    {"dd", "uu"},
-                    {"Dextor", "Labratory"},
-                    {"Frank", "Sanotra"}};
-    for (int i = 0; i < 10; i++)
-    {
-        life(PerArr, 4);
-        cout<<__LINE__<<"here\n";
-    }
-    return 0;
+
+    // Person PerArr[]{{"nam", "n"},
+    //                 {"dd", "uu"},
+    //                 {"Dextor", "Labratory"},
+    //                 {"Frank", "Sanotra"}};
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     life(PerArr, 4);
+    //     cout<<__LINE__<<"here\n";
+    // }
+    // return 0;
+
     // choiceSocial(PerArr, 4);
     // till here for testin
     // when finished testing uncomment below
-    // Person PerArr[8];
+    Person PerArr[8];
     // till here
     int numberOfSims = 0;
     int JobChoise = 0;
     char buff[20] = {'\0'};
     Job jobs[5];
+    int delSIm = 0;
     jobs[0].setJobTitle((char *)"Farmer");
     jobs[0].setJobDaylyWorkHours(12);
     jobs[0].setJobSalary(100);
@@ -216,9 +218,10 @@ int main()
             buff[0] = '\0';
             strcpy(buff, PerArr[simCounter].getLastName());
             cout << buff << " was added \n\n";
-            simCounter++;
-            // setting that person's job:
 
+            // simCounter++ was here but it encreases the counter by 2 for every new sim so I deleted it
+
+            // setting that person's job:
             cout << "choose a job:\n";
             for (int j = 0; j <= 4; j++)
             {
@@ -238,13 +241,43 @@ int main()
 
             break;
         case 2:
+            //----------------//Deleting a sim: -----------------
+
+            // option 1: there are no sims
             if (simCounter == 0)
             {
-                cout << "There are no sims";
+                cout << "There are no sims yet\n";
+                break;
             }
-            // PerArr[simCounter].~Person();
+            // option 2: the wanted sim is the last in the array
+            cout << "Which sim would you like to delete?\n";
+            for (int c = 0; c < simCounter; c++)
+            {
+                buff[0] = '\0';
+                strcpy(buff, PerArr[c].getFirstName());
+                cout << c + 1 << "." << buff;
+                buff[0] = '\0';
+                strcpy(buff, PerArr[c].getLastName());
+                cout << " " << buff << "\n";
+            }
+            cin >> delSIm;
+            // cout << "Sim counter:" << simCounter<< "\n";
+            if (delSIm == simCounter)
+            {
+                PerArr[simCounter].~Person();
+                simCounter--;
+                break;
+            }
 
+            // option 3: the sim is not the last one in the array
+            for (int c = delSIm - 1; c <= simCounter - 1; c++)
+            {
+                PerArr[c] = PerArr[c + 1];
+            }
+            PerArr[simCounter - 1].~Person();
+            simCounter--;
             break;
+
         case 3:
             // option 3 output
             choiceSocial(PerArr, numberOfSims);

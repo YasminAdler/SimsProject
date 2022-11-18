@@ -19,7 +19,7 @@ public:
     Person(char *firstName, char *lastName);
     // Person(char *firstName, char *lastName, Needs* need);
     // Person(char *firstName, char *lastName, Needs* need, Job* job);
-
+    Person(const Person &t);
     void setFirstName(char *FirstName);
     void setLastName(char *LastName);
     void setJob(Job job);

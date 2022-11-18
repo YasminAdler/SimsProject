@@ -272,3 +272,4 @@ void Social::increseSocial()
     if (level_cl >= 10)
         level_cl = 10;
 }
+

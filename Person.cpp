@@ -87,9 +87,22 @@ void Person::printNeeds()
 {
     needs_cl.printNeeds();
 }
+
+Person::Person(const Person &t)
+{
+    firstName_cl = new char[sizeof(t.firstName_cl) + 1];
+    strcpy(firstName_cl, t.firstName_cl);
+
+    lastName_cl = new char[sizeof(t.lastName_cl) + 1];
+    strcpy(lastName_cl, t.lastName_cl);
+    cout << "Copy Constructor\n";
+    
+    //didn't add the job copy constructor yet!!
+}
+
 Person::~Person()
 {
     delete[] firstName_cl;
     delete[] lastName_cl;
-    // delete[] job_cl; 
+    // delete[] job_cl;
 }
