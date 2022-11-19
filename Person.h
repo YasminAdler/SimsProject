@@ -16,10 +16,10 @@ private:
 public:
     Person();
     // Person(char *firstName);
-    Person(char *firstName, char *lastName);
+    // Person(char *firstName, char *lastName);
     // Person(char *firstName, char *lastName, Needs* need);
     // Person(char *firstName, char *lastName, Needs* need, Job* job);
-    Person(const Person &t);
+    // Person(const Person &t);
     void setFirstName(char *FirstName);
     void setLastName(char *LastName);
     void setJob(Job job);
@@ -43,9 +43,7 @@ public:
             2 Text
             3 PhoneCall
     */
-    void increseNeed(int needNumber, void *secondItem = nullptr, void *thirdItem = nullptr
-
-    );
+    void increseNeed(int needNumber, void *secondItem = nullptr, void *thirdItem = nullptr);
 
     char *getFirstName();
     char *getLastName();

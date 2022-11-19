@@ -24,6 +24,6 @@ void Eat(Food food)
 
 Animal::~Animal()
 {
-    delete name_cl;
-    delete kind_cl;
+    delete[] name_cl;
+    delete[] kind_cl;
 }

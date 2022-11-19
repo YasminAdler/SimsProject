@@ -1,3 +1,11 @@
+/*Problems:
+    1 deleting a sim crashes program
+    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
+    3 Attemptig to control sim crashes program
+
+
+
+*/
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -15,7 +23,6 @@ using namespace std;
 void printSimName(Person Sim)
 {
     // cout << __LINE__ << __func__ << " here\n";
-
     cout << Sim.getFirstName()
          << " "
          << Sim.getLastName();
@@ -44,7 +51,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
 {
     int count = 0;
     long long choice;
-    Person *contact;
+    // Person *contact;
     // Needs* currentSimNeeds;
     // want to do sompthing like this
     // for (; currentSim != nullptr; currentSim++)
@@ -115,11 +122,11 @@ void life(Person *simArray, int simArraySize)
     // change to pointers, cant figure out refrences
     for (int i = 0; i < simArraySize; i++)
     {
+        cout << __LINE__ << __func__ << " here\n";
         (*(simArray + i)).life();
 
         if ((*(simArray + i)).CheckIfDead())
         {
-            // cout << __LINE__ << __func__ << " here\n";
             printSimName(*(simArray + i));
             cout << " is dead!\n";
         }
@@ -146,23 +153,22 @@ int main()
     // 1 constroctor Person::Person(char*,char*)
     // 2 PerArr details
     // 3 choiseSocial function call
-    Person PerArr[]{{(char *)"nam", (char *)"n"},
-                    {(char *)"dd", (char *)"uu"},
-                    {(char *)"Dextor", (char *)"Labratory"},
-                    {(char *)"Frank", (char *)"Sanotra"}};
-    for (int i = 0; i < 10; i++)
-    {
-        life(PerArr, 4);
-        // cout << __LINE__ << __func__ << " line here\n";
-    }
-    return 0;
+    // Person PerArr[]{{(char *)"nam", (char *)"n"},
+    //                 {(char *)"dd", (char *)"uu"},
+    //                 {(char *)"Dextor", (char *)"Labratory"},
+    //                 {(char *)"Frank", (char *)"Sanotra"}};
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     life(PerArr, 4);
+    //     // cout << __LINE__ << __func__ << " line here\n";
+    // }
+    // return 0;
 
-    choiceSimFunctions(PerArr, 4);
+    // choiceSimFunctions(PerArr, 4);
     // till here for testin
     // when finished testing uncomment below
-    // Person PerArr[8];
+    Person PerArr[8];
     // till here
-    int numberOfSims = 0;
     int JobChoise = 0;
     char buff[20] = {'\0'};
     Job jobs[5];
@@ -188,10 +194,14 @@ int main()
     while (choice != 0)
     {
 
-        cout << "0. Exit        1. Add a person        2.Delete a person       3.Control a person\n\n";
+        cout << "0. Exit        1. Add a sim        2.Delete a sim       3.Control a sim\n\n";
         cout << ">>>";
         cin >> choice;
-
+        if (choice < 0 || choice > 3)
+        {
+            cout << "Not a valid chioce\n";
+            continue;
+        }
         switch (choice)
         {
         case 0:
@@ -200,13 +210,13 @@ int main()
             break;
         case 1:
 
-            // Adding the person's first and last name:
+            // Adding the sim's first and last name:
             buff[0] = {'\0'};
-            cout << "Enter the person's first name: \n";
+            cout << "Enter the sim's first name: \n";
             cin >> buff;
             PerArr[simCounter].setFirstName(buff);
             buff[0] = {'\0'};
-            cout << "Enter the person's last name: \n";
+            cout << "Enter the sim's last name: \n";
             cin >> buff;
             PerArr[simCounter].setLastName(buff);
             buff[0] = '\0';
@@ -218,15 +228,20 @@ int main()
 
             // simCounter++ was here but it encreases the counter by 2 for every new sim so I deleted it
 
-            // setting that person's job:
-            cout << "choose a job:\n";
-            for (int j = 0; j <= 4; j++)
+            // setting that sim's job:
+            do
             {
-                buff[0] = '\0';
-                strcpy(buff, jobs[j].getJobTitle());
-                cout << j << '.' << buff << "\n";
-            }
-            cin >> JobChoise;
+                cout << "choose a job:\n";
+                for (int j = 0; j <= 4; j++)
+                {
+                    buff[0] = '\0';
+                    strcpy(buff, jobs[j].getJobTitle());
+                    cout << j << '.' << buff << "\n";
+                }
+                cin >> JobChoise;
+                if (JobChoise < 0 || JobChoise > 4)
+                    cout << "Not a valid option\n";
+            } while (JobChoise < 0 || JobChoise > 4);
             TempJob = jobs[JobChoise];
             PerArr[simCounter].setJob(TempJob);
             buff[0] = '\0';
@@ -277,7 +292,7 @@ int main()
 
         case 3:
             // option 3 output
-            choiceSimFunctions(PerArr, numberOfSims);
+            choiceSimFunctions(PerArr, simCounter);
             life(PerArr, simCounter);
         default:
             break;

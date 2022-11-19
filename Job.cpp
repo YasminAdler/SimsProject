@@ -10,15 +10,18 @@ Job::Job()
 Job::Job(char *title)
 {
     title_cl = new char[strlen(title) + 1];
+    strcpy(title_cl, title);
 }
 Job::Job(char *title, int salary)
 {
     title_cl = new char[strlen(title) + 1];
+    strcpy(title_cl, title);
     salary_cl = salary;
 }
 Job::Job(char *title, int salary, int dailyWorkHours)
 {
     title_cl = new char[strlen(title) + 1];
+    strcpy(title_cl,title);
     salary_cl = salary;
     dailyWorkHours_cl = dailyWorkHours;
 }
@@ -59,5 +62,5 @@ void Job::setJobDaylyWorkHours(int workingHrs)
 
 Job::~Job()
 {
-    delete title_cl;
+    delete[] title_cl;
 }

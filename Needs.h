@@ -103,7 +103,6 @@ public:
     void Text(Person person);
     void PhoneCall(Person person);
     int get_level();
-
     void increseSocial();
 };
 

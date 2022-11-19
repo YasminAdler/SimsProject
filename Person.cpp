@@ -13,13 +13,13 @@ Person::Person()
 //     strcpy(firstName_cl, firstName);
 // }
 
-Person::Person(char *firstName, char *lastName)
-{
-    firstName_cl = new char(strlen(firstName) + 1);
-    strcpy(firstName_cl, firstName);
-    lastName_cl = new char(strlen(lastName) + 1);
-    strcpy(lastName_cl, lastName);
-}
+// Person::Person(char *firstName, char *lastName)
+// {
+//     firstName_cl = new char(strlen(firstName) + 1);
+//     strcpy(firstName_cl, firstName);
+//     lastName_cl = new char(strlen(lastName) + 1);
+//     strcpy(lastName_cl, lastName);
+// }
 
 // Person::Person(char *firstName, char *lastName, Needs* need)
 // {
@@ -88,21 +88,21 @@ void Person::printNeeds()
     needs_cl.printNeeds();
 }
 
-Person::Person(const Person &t)
-{
-    firstName_cl = new char[sizeof(t.firstName_cl) + 1];
-    strcpy(firstName_cl, t.firstName_cl);
+// Person::Person(const Person &t)
+// {
+//     firstName_cl = new char[sizeof(t.firstName_cl) + 1];
+//     strcpy(firstName_cl, t.firstName_cl);
 
-    lastName_cl = new char[sizeof(t.lastName_cl) + 1];
-    strcpy(lastName_cl, t.lastName_cl);
-    cout << "Copy Constructor\n";
+//     lastName_cl = new char[sizeof(t.lastName_cl) + 1];
+//     strcpy(lastName_cl, t.lastName_cl);
+//     cout << "Copy Constructor\n";
     
-    //didn't add the job copy constructor yet!!
-}
+//     //didn't add the job copy constructor yet!!
+// }
 
 Person::~Person()
 {
     delete[] firstName_cl;
     delete[] lastName_cl;
-    // delete[] job_cl;
+    delete[] job_cl;
 }

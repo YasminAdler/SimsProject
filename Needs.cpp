@@ -4,7 +4,12 @@ using namespace std;
 #include "Person.h"
 // class Person;
 
-Needs::Needs()
+Needs::Needs() : bladder_cl{},
+                 hunger_cl{},
+                 energy_cl{},
+                 fun_cl{},
+                 social_cl{},
+                 hygiene_cl{}
 {
 }
 
