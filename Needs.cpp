@@ -78,7 +78,7 @@ void Needs::printNeeds()
          << "Hunger\t" << hunger_cl.get_level() << "\n"
          << "Energy\t" << energy_cl.get_level() << "\n"
          << "Fun\t" << fun_cl.get_level() << "\n"
-         << "Social" << social_cl.get_level() << "\n"
+         << "Social\t" << social_cl.get_level() << "\n"
          << "Hygiene\t" << hygiene_cl.get_level() << "\n";
 }
 Bladder::Bladder()
@@ -272,4 +272,3 @@ void Social::increseSocial()
     if (level_cl >= 10)
         level_cl = 10;
 }
-

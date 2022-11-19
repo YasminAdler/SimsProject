@@ -3,6 +3,9 @@
 
 #include "Food.h"
 #include "Animal.h"
+
+class Person;
+
 enum social
 {
     talk = 1,
@@ -11,7 +14,6 @@ enum social
 };
 enum needNumber
 {
-
     blader = 1,
     hunger,
     energy,
@@ -25,8 +27,6 @@ enum fun
     playComputer,
     playAnimal
 };
-class Social;
-class Person;
 
 class Bladder
 {
