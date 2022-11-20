@@ -79,7 +79,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
             (personArray + i)->increaseBladder();
             break;
         case hunger:
-            (personArray + i)->increaseHunger(nullptr);
+            (personArray + i)->increaseHunger(NULL);
             break;
         case energy:
             (personArray + i)->increaseEnergy();

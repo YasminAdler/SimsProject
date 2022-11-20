@@ -120,8 +120,8 @@ void Person::increseNeed(int needNumber, void *secondItem, void *thirdItem)
 void Person::setJob(Job job)
 {
     // job_cl = new Job[sizeof(job)];
-    job_cl = &job;
-    job_cl->setJobTitle(job.getJobTitle());
+    // job_cl = &job;
+    job_cl.setJobTitle(job.getJobTitle());
 }
 void Person::life()
 {
