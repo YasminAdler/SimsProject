@@ -1,7 +1,9 @@
 /*Problems:
-    1 deleting a sim crashes program
-    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
+    1 deleting a sim crashes program - fixed
+    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done 
     3 Attemptig to control sim crashes program
+    4.in case 3 write a message at first if there are no sims to control
+    5. in 3 -> social -> if there are no sims to talk to the program go nuts then crushes 
 
 
 

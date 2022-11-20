@@ -10,7 +10,7 @@ private:
     char *firstName_cl;
     char *lastName_cl;
     Needs needs_cl;
-    Job job_cl;
+    Job* job_cl;
     int money_cl;
 
 public:
