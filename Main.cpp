@@ -169,10 +169,11 @@ int main()
     // when finished testing uncomment below
     Person PerArr[8];
     // till here
-    int JobChoise = 0;
+    char JobChoise;
     char buff[20] = {'\0'};
     Job jobs[5];
     int delSIm = 0;
+    int inJobChoice;
     jobs[0].setJobTitle((char *)"Farmer");
     jobs[0].setJobDaylyWorkHours(12);
     jobs[0].setJobSalary(100);
@@ -197,7 +198,7 @@ int main()
         cout << "0. Exit        1. Add a sim        2.Delete a sim       3.Control a sim\n\n";
         cout << ">>>";
         cin >> choice;
-        if (choice < 0 || choice > 3)
+        if (!(choice == 0 || choice == 1 || choice == 2 || choice == 3))
         {
             cout << "Not a valid chioce\n";
             continue;
@@ -231,6 +232,7 @@ int main()
             // setting that sim's job:
             do
             {
+                JobChoise = 0;
                 cout << "choose a job:\n";
                 for (int j = 0; j <= 4; j++)
                 {
@@ -239,10 +241,9 @@ int main()
                     cout << j << '.' << buff << "\n";
                 }
                 cin >> JobChoise;
-                if (JobChoise < 0 || JobChoise > 4)
-                    cout << "Not a valid option\n";
-            } while (JobChoise < 0 || JobChoise > 4);
-            TempJob = jobs[JobChoise];
+            } while ((JobChoise != '0') && JobChoise != '1' && JobChoise != '2' && JobChoise != '3' && JobChoise != '4');
+            inJobChoice = JobChoise - 48;
+            TempJob = jobs[inJobChoice];
             PerArr[simCounter].setJob(TempJob);
             buff[0] = '\0';
 
