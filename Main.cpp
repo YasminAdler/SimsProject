@@ -20,7 +20,7 @@ using namespace std;
 //     PersonArray(Person *arry, int size);
 //     void
 // };
-void printSimName(Person Sim)
+void printSimName(Person& Sim)
 {
     // cout << __LINE__ << __func__ << " here\n";
     cout << Sim.getFirstName()
@@ -322,6 +322,7 @@ int main()
             // option 3 output
             choiceSimFunctions(PerArr, simCounter);
             life(PerArr, simCounter);
+            break;
         default:
             cout << "you shouldn't get this messege line: " << __LINE__ << endl;
             break;
