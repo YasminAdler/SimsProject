@@ -30,7 +30,8 @@ void Needs::life()
     social_cl.minus1Social();
     hygiene_cl.minus1Hygiene();
 }
-
+/*
+Depricated
 void Needs::increseNeed(int needNumber, void *secondItem, void *thirdItem)
 {
 
@@ -77,6 +78,51 @@ void Needs::increseNeed(int needNumber, void *secondItem, void *thirdItem)
         break;
     }
 }
+*/
+void Needs::increaseBladder()
+{
+    bladder_cl.UseToilet();
+}
+void Needs::increaseHunger(Food food)
+{
+    hunger_cl.Eat(food);
+}
+void Needs::increaseEnergy()
+{
+    energy_cl.Sleep();
+}
+void Needs::increaseFunGuitar()
+{
+    fun_cl.PlayGuitar();
+}
+void Needs::increaseFunComputer()
+{
+    fun_cl.PlayComputer();
+}
+void Needs::increaseFunAnimal(Animal animal)
+{
+    fun_cl.PlayAnimal(animal);
+}
+void Needs::increaseSocialTalk(Person sim)
+{
+    social_cl.Talk(sim);
+}
+void Needs::increaseSocialText(Person sim)
+{
+    social_cl.Text(sim);
+}
+void Needs::increaseSocialPhone(Person sim)
+{
+    social_cl.PhoneCall(sim);
+}
+void Needs::increaseSocial(){
+    social_cl.increseSocial();
+}
+void Needs::increaseHygiene()
+{
+    hygiene_cl.Shower();
+}
+
 void Needs::printNeeds()
 {
     cout << "Blader\t" << bladder_cl.get_level() << "\n"
@@ -249,7 +295,7 @@ void Social::Talk(Person person)
          << person.getLastName()
          << "\n";
     increseSocial();
-    person.increseNeed(5);
+    person.increaseSocial();
 }
 void Social::Text(Person person)
 {
@@ -259,7 +305,7 @@ void Social::Text(Person person)
          << person.getLastName()
          << "\n";
     increseSocial();
-    person.increseNeed(5);
+    person.increaseSocial();
 }
 void Social::PhoneCall(Person person)
 {
@@ -269,7 +315,7 @@ void Social::PhoneCall(Person person)
          << person.getLastName()
          << "\n";
     increseSocial();
-    person.increseNeed(5);
+    person.increaseSocial();
 }
 void Social::increseSocial()
 {

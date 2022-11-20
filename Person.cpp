@@ -52,6 +52,50 @@ void Person::setLastName(char *LastName)
 
     strcpy(lastName_cl, LastName);
 }
+void Person::increaseBladder()
+{
+    needs_cl.increaseBladder();
+}
+void Person::increaseHunger(Food food)
+{
+    needs_cl.increaseHunger(food);
+}
+void Person::increaseEnergy()
+{
+    needs_cl.increaseEnergy();
+}
+void Person::increaseFunGuitar()
+{
+    needs_cl.increaseFunGuitar();
+}
+void Person::increaseFunComputer()
+{
+    needs_cl.increaseFunComputer();
+}
+void Person::increaseFunAnimal(Animal animal)
+{
+    needs_cl.increaseFunAnimal(animal);
+}
+void Person::increaseSocialTalk(Person sim)
+{
+    needs_cl.increaseSocialTalk(sim);
+}
+void Person::increaseSocialText(Person sim)
+{
+    needs_cl.increaseSocialText(sim);
+}
+void Person::increaseSocialPhone(Person sim)
+{
+    needs_cl.increaseSocialPhone(sim);
+}
+void Person::increaseSocial()
+{
+    needs_cl.increaseSocial();
+}
+void Person::increaseHygiene()
+{
+    needs_cl.increaseHygiene();
+}
 
 char *Person::getFirstName()
 {
@@ -61,19 +105,22 @@ char *Person::getLastName()
 {
     return lastName_cl;
 }
+/*
+Depritiated
 void Person::increseNeed(int needNumber, void *secondItem, void *thirdItem)
 {
     needs_cl.increseNeed(needNumber, secondItem, thirdItem);
 }
+*/
 // Needs *Person::getNeeds()
 // {
 //    return &needs_cl;
 //
 void Person::setJob(Job job)
 {
-    job_cl = new Job[sizeof(job)];
-    job_cl = &job;
-    job_cl->setJobTitle(job.getJobTitle());
+    // job_cl = new Job[sizeof(job)];
+    job_cl = job;
+    job_cl.setJobTitle(job.getJobTitle());
 }
 void Person::life()
 {
@@ -96,7 +143,7 @@ void Person::printNeeds()
 //     lastName_cl = new char[sizeof(t.lastName_cl) + 1];
 //     strcpy(lastName_cl, t.lastName_cl);
 //     cout << "Copy Constructor\n";
-    
+
 //     //didn't add the job copy constructor yet!!
 // }
 
@@ -104,5 +151,4 @@ Person::~Person()
 {
     delete[] firstName_cl;
     delete[] lastName_cl;
-    delete[] job_cl;
 }
