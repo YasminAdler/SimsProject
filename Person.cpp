@@ -150,8 +150,8 @@ void Person::printNeeds()
 
 Person::~Person()
 {
-    delete[] firstName_cl;
-    delete[] lastName_cl;
+    // delete[] firstName_cl;
+    // delete[] lastName_cl;
     // delete[] job_cl;
     
 }
