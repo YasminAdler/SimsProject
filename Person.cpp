@@ -69,9 +69,10 @@ void Person::increseNeed(int needNumber, void *secondItem, void *thirdItem)
 // {
 //    return &needs_cl;
 //
+
 void Person::setJob(Job job)
 {
-    job_cl = new Job[sizeof(job)];
+    // job_cl = new Job[sizeof(job)];
     job_cl = &job;
     job_cl->setJobTitle(job.getJobTitle());
 }
@@ -104,5 +105,6 @@ Person::~Person()
 {
     delete[] firstName_cl;
     delete[] lastName_cl;
-    delete[] job_cl;
+    // delete[] job_cl;
+    
 }
