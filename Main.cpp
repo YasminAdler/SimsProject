@@ -20,7 +20,7 @@ using namespace std;
 //     PersonArray(Person *arry, int size);
 //     void
 // };
-void printSimName(Person Sim)
+void printSimName(Person& Sim)
 {
     // cout << __LINE__ << __func__ << " here\n";
     cout << Sim.getFirstName()
@@ -58,9 +58,9 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
     // current relies on knowing number of sims in PerArr
     for (int i = 0; i < numberOfSims; i++)
     {
-        // cout << *(personArray + i)->getFirstName();
-        // cout << count << "\n";
-        // count++;
+        cout << "whta would you like ";
+        printSimName(*(personArray + i));
+        cout << " to do?" << endl;
         do
         {
             cout << "1. Restroom\n"
@@ -75,6 +75,15 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
         } while (choice < 1 || choice > 6);
         switch (choice)
         {
+        case bladder:
+            (personArray + i)->increaseBladder();
+            break;
+        case hunger:
+            (personArray + i)->increaseHunger(NULL);
+            break;
+        case energy:
+            (personArray + i)->increaseEnergy();
+            break;
         case fun:
             do
             {
@@ -88,11 +97,17 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
             } while (choice < 1 || choice > 3);
             switch (choice)
             {
+            case playGuitar:
+                (personArray + i)->increaseFunGuitar();
+                break;
+            case playComputer:
+                (personArray + i)->increaseFunComputer();
+                break;
             case playAnimal:
-                (personArray + i)->increseNeed(fun, (void *)playAnimal);
+                (personArray + i)->increaseFunAnimal(nullptr);
                 break;
             default:
-                (personArray + i)->increseNeed(fun, (void *)choice);
+                cout << "you shouldn't get this messege line: " << __LINE__ << endl;
                 break;
             }
             break;
@@ -107,11 +122,24 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                 cin >> choice;
                 if (choice < 1 || choice > 3)
                     cout << "Not a valid option\n";
-            } while (choice < 0 || choice > 3);
-            (personArray + i)->increseNeed(5, (void *)choice, (void *)contactSim(personArray, numberOfSims, i));
-            break;
+            } while (choice < 1 || choice > 3);
+            switch (choice)
+            {
+            case talk:
+                (personArray + i)->increaseSocialTalk(*contactSim(personArray, numberOfSims, i));
+                break;
+            case text:
+                (personArray + i)->increaseSocialText(*contactSim(personArray, numberOfSims, i));
+                break;
+            case phoneCall:
+                (personArray + i)->increaseSocialTalk(*contactSim(personArray, numberOfSims, i));
+                break;
+            default:
+                cout << "you shouldn't get this messege line: " << __LINE__ << endl;
+                break;
+            }
         default:
-            (personArray + i)->increseNeed(choice);
+            cout << "you shouldn't get this messege line: " << __LINE__ << endl;
             break;
         }
     }
@@ -295,7 +323,9 @@ int main()
             // option 3 output
             choiceSimFunctions(PerArr, simCounter);
             life(PerArr, simCounter);
+            break;
         default:
+            cout << "you shouldn't get this messege line: " << __LINE__ << endl;
             break;
         }
     }
