@@ -1,9 +1,9 @@
 /*Problems:
     1 deleting a sim crashes program - fixed
-    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done 
+    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
     3 Attemptig to control sim crashes program
     4.in case 3 write a message at first if there are no sims to control
-    5. in 3 -> social -> if there are no sims to talk to the program go nuts then crushes 
+    5. in 3 -> social -> if there are no sims to talk to the program go nuts then crushes - posibly fixed needs check
 
 
 
@@ -22,7 +22,7 @@ using namespace std;
 //     PersonArray(Person *arry, int size);
 //     void
 // };
-void printSimName(Person& Sim)
+void printSimName(Person &Sim)
 {
     // cout << __LINE__ << __func__ << " here\n";
     cout << Sim.getFirstName()
@@ -31,10 +31,19 @@ void printSimName(Person& Sim)
 }
 Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
 {
-    int choice;
+    char choice;
     do
     {
-        cout << "Who will " << *(personArray + currentSimNum)->getFirstName() << " socialize with?\n";
+        if (numberOfSims == 1)
+        {
+            cout << "Its lonely here. ";
+            printSimName(personArray[currentSimNum]);
+            cout << " has no one to socialize with :(\n";
+            break;
+        }
+        cout << "Who will ";
+        printSimName(personArray[currentSimNum]);
+        cout << " socialize with?\n";
         for (int i = 0; i < numberOfSims; i++)
         {
             if (currentSimNum == i)
@@ -44,6 +53,7 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
             cout << "\n";
         }
         cin >> choice;
+        choice -= 48;
         if (currentSimNum == choice || choice < 1 || choice > numberOfSims)
             cout << "Not a valid option\n";
     } while (choice < 1 || choice > numberOfSims);
@@ -52,7 +62,7 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
 void choiceSimFunctions(Person *personArray, int numberOfSims)
 {
     int count = 0;
-    long long choice;
+    char choice;
     // Person *contact;
     // Needs* currentSimNeeds;
     // want to do sompthing like this
@@ -72,6 +82,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                  << "5. Social\n"
                  << "6. Bathe\n";
             cin >> choice;
+            choice -= 48;
             if (choice < 1 || choice > 6)
                 cout << "Not a valid option\n";
         } while (choice < 1 || choice > 6);
