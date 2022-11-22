@@ -1,10 +1,14 @@
 /*Problems:
-    1 deleting a sim crashes program - fixed
-    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
-    3 Attemptig to control sim crashes program
-    4.in case 3 write a message at first if there are no sims to control
-    5. in 3 -> social -> if there are no sims to talk to the program go nuts then crushes - posibly fixed needs check
 
+    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
+    3 Attemptig to control sim crashes program - almost fixed see 6
+    4 in case 3 write a message at first if there are no sims to control
+    5 in 3 -> social -> if there are no sims to talk to the program go nuts then crushes - fixed
+    6 PlayAnimal crashes
+    7 Social crashes on exit if only one sim - fixed
+    8 Social gets error message "you shouldn't get this messege line: 157"
+    9 Soial cant input 0 as a choice - fixed
+    10 Bathe "you shouldn't get this messege line: 161" - fixed
 
 
 */
@@ -34,13 +38,6 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
     char choice;
     do
     {
-        if (numberOfSims == 1)
-        {
-            cout << "Its lonely here. ";
-            printSimName(personArray[currentSimNum]);
-            cout << " has no one to socialize with :(\n";
-            break;
-        }
         cout << "Who will ";
         printSimName(personArray[currentSimNum]);
         cout << " socialize with?\n";
@@ -54,9 +51,9 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
         }
         cin >> choice;
         choice -= 48;
-        if (currentSimNum == choice || choice < 1 || choice > numberOfSims)
+        if (currentSimNum == choice || choice < 0 || choice > numberOfSims)
             cout << "Not a valid option\n";
-    } while (choice < 1 || choice > numberOfSims);
+    } while (choice < 0 || choice > numberOfSims);
     return personArray + choice;
 }
 void choiceSimFunctions(Person *personArray, int numberOfSims)
@@ -105,6 +102,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                      << "2. PlayComputer\n"
                      << "3. PlayAnimal\n";
                 cin >> choice;
+                choice -= 48;
                 if (choice < 1 || choice > 3)
                     cout << "Not a valid option\n";
             } while (choice < 1 || choice > 3);
@@ -117,7 +115,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                 (personArray + i)->increaseFunComputer();
                 break;
             case playAnimal:
-                (personArray + i)->increaseFunAnimal(nullptr);
+                (personArray + i)->increaseFunAnimal(NULL);
                 break;
             default:
                 cout << "you shouldn't get this messege line: " << __LINE__ << endl;
@@ -126,6 +124,13 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
             break;
         case social:
             // option Social output
+            if (numberOfSims == 1)
+            {
+                cout << "Its lonely here. ";
+                printSimName(personArray[i]);
+                cout << " has no one to socialize with :(\n";
+                break;
+            }
             do
             {
                 cout << "what kind of socializing?\n"
@@ -133,6 +138,7 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                      << "2. Face to Face\n"
                      << "3. Messege\n";
                 cin >> choice;
+                choice -= 48;
                 if (choice < 1 || choice > 3)
                     cout << "Not a valid option\n";
             } while (choice < 1 || choice > 3);
@@ -151,6 +157,9 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                 cout << "you shouldn't get this messege line: " << __LINE__ << endl;
                 break;
             }
+        case hygiene:
+            (personArray + i)->increaseHygiene();
+            break;
         default:
             cout << "you shouldn't get this messege line: " << __LINE__ << endl;
             break;
@@ -163,7 +172,7 @@ void life(Person *simArray, int simArraySize)
     // change to pointers, cant figure out refrences
     for (int i = 0; i < simArraySize; i++)
     {
-        cout << __LINE__ << __func__ << " here\n";
+        // cout << __LINE__ << __func__ << " here\n";
         (*(simArray + i)).life();
 
         if ((*(simArray + i)).CheckIfDead())
@@ -175,7 +184,7 @@ void life(Person *simArray, int simArraySize)
         {
             // cout << __LINE__ << __func__ << " here\n";
             printSimName((*(simArray + i)));
-            cout << "\n";
+            cout << " stats:\n";
             // cout << __LINE__ << __func__ << " here\n";
 
             (*(simArray + i)).printNeeds();
