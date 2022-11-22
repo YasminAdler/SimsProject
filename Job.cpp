@@ -21,7 +21,7 @@ Job::Job(char *title, int salary)
 Job::Job(char *title, int salary, int dailyWorkHours)
 {
     title_cl = new char[strlen(title) + 1];
-    strcpy(title_cl,title);
+    strcpy(title_cl, title);
     salary_cl = salary;
     dailyWorkHours_cl = dailyWorkHours;
 }
