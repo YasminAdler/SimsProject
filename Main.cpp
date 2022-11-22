@@ -1,15 +1,15 @@
 /*Problems:
 
-    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done
-    3 Attemptig to control sim crashes program - almost fixed see 6
-    4 in case 3 write a message at first if there are no sims to control
-    5 in 3 -> social -> if there are no sims to talk to the program go nuts then crushes - fixed
-    6 PlayAnimal crashes
-    7 Social crashes on exit if only one sim - fixed
-    8 Social gets error message "you shouldn't get this messege line: 157"
-    9 Soial cant input 0 as a choice - fixed
-    10 Bathe "you shouldn't get this messege line: 161" - fixed
+    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done - almost fixed
+    3 Attemptig to control sim crashes program - almost fixed see 6 - Fixed
+    4 in case 3 write a message at first if there are no sims to control - Done
 
+    6 PlayAnimal crashes - fixed
+
+    8 Social gets error message "error you shouldn't get this messege line: 157" - can't recreate - fixed
+
+    11 Social also increaces Hygiene - fixed
+    12 want to change to referance wherever possible
 
 */
 #include <iostream>
@@ -17,22 +17,22 @@
 using namespace std;
 #include "Person.h"
 
-// class PersonArray
-// {
-//     Person *arry;
-//     int size;
-// public:
-//     PersonArray(int size);
-//     PersonArray(Person *arry, int size);
-//     void
-// };
+enum choices{
+    exitGame,
+    addSim,
+    deleteSim,
+    controlSim
+};
+
+// Prints sim name
 void printSimName(Person &Sim)
 {
-    // cout << __LINE__ << __func__ << " here\n";
+    // cout << __LINE__ << __func__ << __func__ << " here\n";
     cout << Sim.getFirstName()
          << " "
          << Sim.getLastName();
 }
+// Gives chocies of whom a sim can contact and returns requested sim
 Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
 {
     char choice;
@@ -56,15 +56,74 @@ Person *contactSim(Person *personArray, int numberOfSims, int currentSimNum)
     } while (choice < 0 || choice > numberOfSims);
     return personArray + choice;
 }
+// Gives Fun options
+void optionFun(Person &sim)
+{
+    char choice;
+    Animal a;
+    do
+    {
+        cout << "What kind of fun?\n"
+             << "1. PlayGuitar\n"
+             << "2. PlayComputer\n"
+             << "3. PlayAnimal\n";
+        cin >> choice;
+        choice -= 48;
+        if (choice < 1 || choice > 3)
+            cout << "Not a valid option\n";
+    } while (choice < 1 || choice > 3);
+    switch (choice)
+    {
+    case playGuitar:
+        sim.increaseFunGuitar();
+        break;
+    case playComputer:
+        sim.increaseFunComputer();
+        break;
+    case playAnimal:
+        sim.increaseFunAnimal(a);
+        break;
+    default:
+        cout << "error you shouldn't get this messege line: " << __LINE__ << __func__ << endl;
+        break;
+    }
+}
+// Gives Social options
+void optionSocial(Person *simArray, Person &currentSim, int currentSimNum, int numberOfSims)
+{
+    char choice;
+    do
+    {
+        cout << "what kind of socializing?\n"
+             << "1. Face to Face\n"
+             << "2. Messege\n"
+             << "3. Phone\n";
+        cin >> choice;
+        choice -= 48;
+        if (choice < 1 || choice > 3)
+            cout << "Not a valid option\n";
+    } while (choice < 1 || choice > 3);
+    switch (choice)
+    {
+    case talk:
+        currentSim.increaseSocialTalk(*contactSim(simArray, numberOfSims, currentSimNum));
+        break;
+    case text:
+        currentSim.increaseSocialText(*contactSim(simArray, numberOfSims, currentSimNum));
+        break;
+    case phoneCall:
+        currentSim.increaseSocialPhone(*contactSim(simArray, numberOfSims, currentSimNum));
+        break;
+    default:
+        cout << "error you shouldn't get this messege line: " << __LINE__ << __func__ << endl;
+        break;
+    }
+}
+// Gives sim functions and operates according to input
 void choiceSimFunctions(Person *personArray, int numberOfSims)
 {
     int count = 0;
     char choice;
-    // Person *contact;
-    // Needs* currentSimNeeds;
-    // want to do sompthing like this
-    // for (; currentSim != nullptr; currentSim++)
-    // current relies on knowing number of sims in PerArr
     for (int i = 0; i < numberOfSims; i++)
     {
         cout << "whta would you like ";
@@ -95,35 +154,9 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
             (personArray + i)->increaseEnergy();
             break;
         case fun:
-            do
-            {
-                cout << "What kind of fun?\n"
-                     << "1. PlayGuitar\n"
-                     << "2. PlayComputer\n"
-                     << "3. PlayAnimal\n";
-                cin >> choice;
-                choice -= 48;
-                if (choice < 1 || choice > 3)
-                    cout << "Not a valid option\n";
-            } while (choice < 1 || choice > 3);
-            switch (choice)
-            {
-            case playGuitar:
-                (personArray + i)->increaseFunGuitar();
-                break;
-            case playComputer:
-                (personArray + i)->increaseFunComputer();
-                break;
-            case playAnimal:
-                (personArray + i)->increaseFunAnimal(NULL);
-                break;
-            default:
-                cout << "you shouldn't get this messege line: " << __LINE__ << endl;
-                break;
-            }
+            optionFun(*(personArray + i));
             break;
         case social:
-            // option Social output
             if (numberOfSims == 1)
             {
                 cout << "Its lonely here. ";
@@ -131,48 +164,27 @@ void choiceSimFunctions(Person *personArray, int numberOfSims)
                 cout << " has no one to socialize with :(\n";
                 break;
             }
-            do
-            {
-                cout << "what kind of socializing?\n"
-                     << "1. Phone\n"
-                     << "2. Face to Face\n"
-                     << "3. Messege\n";
-                cin >> choice;
-                choice -= 48;
-                if (choice < 1 || choice > 3)
-                    cout << "Not a valid option\n";
-            } while (choice < 1 || choice > 3);
-            switch (choice)
-            {
-            case talk:
-                (personArray + i)->increaseSocialTalk(*contactSim(personArray, numberOfSims, i));
-                break;
-            case text:
-                (personArray + i)->increaseSocialText(*contactSim(personArray, numberOfSims, i));
-                break;
-            case phoneCall:
-                (personArray + i)->increaseSocialTalk(*contactSim(personArray, numberOfSims, i));
-                break;
-            default:
-                cout << "you shouldn't get this messege line: " << __LINE__ << endl;
-                break;
-            }
+            optionSocial(personArray, personArray[i], i, numberOfSims);
+            break;
         case hygiene:
             (personArray + i)->increaseHygiene();
             break;
         default:
-            cout << "you shouldn't get this messege line: " << __LINE__ << endl;
+            cout << "error you shouldn't get this messege line: " << __LINE__ << __func__ << endl;
             break;
         }
     }
     return;
 }
+/*
+Daily living is taxing,
+so reprisenting this is fuction named "life" which removes 1 (-1) from all of the sims stats(Needs).
+*/
 void life(Person *simArray, int simArraySize)
 {
-    // change to pointers, cant figure out refrences
     for (int i = 0; i < simArraySize; i++)
     {
-        // cout << __LINE__ << __func__ << " here\n";
+        // cout << __LINE__ << __func__ << __func__ << " here\n";
         (*(simArray + i)).life();
 
         if ((*(simArray + i)).CheckIfDead())
@@ -182,47 +194,28 @@ void life(Person *simArray, int simArraySize)
         }
         else
         {
-            // cout << __LINE__ << __func__ << " here\n";
+            // cout << __LINE__ << __func__ << __func__ << " here\n";
             printSimName((*(simArray + i)));
             cout << " stats:\n";
-            // cout << __LINE__ << __func__ << " here\n";
+            // cout << __LINE__ << __func__ << __func__ << " here\n";
 
             (*(simArray + i)).printNeeds();
-            // cout << __LINE__ << __func__ << " here\n";
+            // cout << __LINE__ << __func__ << __func__ << " here\n";
         }
     }
-    // cout << __LINE__ << __func__ << "  here\n";
+    // cout << __LINE__ << __func__ << __func__ << "  here\n";
 }
 
 int main()
 {
     cout << "\n\n--------------------  Welcome to The Sims -------------------\n\n\n";
     cout << "-------------------------- Main Manu -----------------------\n\n";
-    int choice = 1;
-    // for testing - added:
-    // 1 constroctor Person::Person(char*,char*)
-    // 2 PerArr details
-    // 3 choiseSocial function call
-    // Person PerArr[]{{(char *)"nam", (char *)"n"},
-    //                 {(char *)"dd", (char *)"uu"},
-    //                 {(char *)"Dextor", (char *)"Labratory"},
-    //                 {(char *)"Frank", (char *)"Sanotra"}};
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     life(PerArr, 4);
-    //     // cout << __LINE__ << __func__ << " line here\n";
-    // }
-    // return 0;
-
-    // choiceSimFunctions(PerArr, 4);
-    // till here for testin
-    // when finished testing uncomment below
+    char choice = 1;
     Person PerArr[8];
-    // till here
     char JobChoise;
     char buff[20] = {'\0'};
     Job jobs[5];
-    int delSIm = 0;
+    char delSIm;
     int inJobChoice;
     jobs[0].setJobTitle((char *)"Farmer");
     jobs[0].setJobDaylyWorkHours(12);
@@ -248,6 +241,7 @@ int main()
         cout << "0. Exit        1. Add a sim        2.Delete a sim       3.Control a sim\n\n";
         cout << ">>>";
         cin >> choice;
+        choice -= 48;
         if (!(choice == 0 || choice == 1 || choice == 2 || choice == 3))
         {
             cout << "Not a valid chioce\n";
@@ -255,11 +249,11 @@ int main()
         }
         switch (choice)
         {
-        case 0:
+        case exitGame:
             cout << "See you next time!";
             continue;
             break;
-        case 1:
+        case addSim:
 
             // Adding the sim's first and last name:
             buff[0] = {'\0'};
@@ -291,6 +285,8 @@ int main()
                     cout << j << '.' << buff << "\n";
                 }
                 cin >> JobChoise;
+                if (JobChoise < '0' || JobChoise > '4')
+                    cout << "Not a valid option\n";
             } while ((JobChoise != '0') && JobChoise != '1' && JobChoise != '2' && JobChoise != '3' && JobChoise != '4');
             inJobChoice = JobChoise - 48;
             TempJob = jobs[inJobChoice];
@@ -303,9 +299,8 @@ int main()
             simCounter++;
 
             break;
-        case 2:
+        case deleteSim:
             //----------------//Deleting a sim: -----------------
-
             // option 1: there are no sims
             if (simCounter == 0)
             {
@@ -313,17 +308,23 @@ int main()
                 break;
             }
             // option 2: the wanted sim is the last in the array
-            cout << "Which sim would you like to delete?\n";
-            for (int c = 0; c < simCounter; c++)
+            do
             {
-                buff[0] = '\0';
-                strcpy(buff, PerArr[c].getFirstName());
-                cout << c + 1 << "." << buff;
-                buff[0] = '\0';
-                strcpy(buff, PerArr[c].getLastName());
-                cout << " " << buff << "\n";
-            }
-            cin >> delSIm;
+                cout << "Which sim would you like to delete?\n";
+                for (int c = 0; c < simCounter; c++)
+                {
+                    buff[0] = '\0';
+                    strcpy(buff, PerArr[c].getFirstName());
+                    cout << c + 1 << "." << buff;
+                    buff[0] = '\0';
+                    strcpy(buff, PerArr[c].getLastName());
+                    cout << " " << buff << "\n";
+                }
+                cin >> delSIm;
+                delSIm -= 48;
+                if (delSIm < 0 || delSIm > simCounter)
+                    cout << "Not a valid option\n";
+            } while (delSIm < 0 || delSIm > simCounter);
             // cout << "Sim counter:" << simCounter<< "\n";
             if (delSIm == simCounter)
             {
@@ -340,14 +341,24 @@ int main()
             PerArr[simCounter - 1].~Person();
             simCounter--;
             break;
-
-        case 3:
+        case controlSim:
             // option 3 output
+            /*If there are no sims dont do anything*/
+            if (simCounter == 0)
+            {
+                cout << "There are no sims yet\n";
+                break;
+            }
+            /*If there are sims give options*/
             choiceSimFunctions(PerArr, simCounter);
+            /*
+            Daily living is taxing,
+            so reprisenting this is fuction named "life" which removes 1 (-1) from all stats(Needs).
+            */
             life(PerArr, simCounter);
             break;
         default:
-            cout << "you shouldn't get this messege line: " << __LINE__ << endl;
+            cout << "error you shouldn't get this messege line: " << __LINE__ << __func__ << endl;
             break;
         }
     }

@@ -76,15 +76,15 @@ void Person::increaseFunAnimal(Animal animal)
 {
     needs_cl.increaseFunAnimal(animal);
 }
-void Person::increaseSocialTalk(Person sim)
+void Person::increaseSocialTalk(Person &sim)
 {
     needs_cl.increaseSocialTalk(sim);
 }
-void Person::increaseSocialText(Person sim)
+void Person::increaseSocialText(Person &sim)
 {
     needs_cl.increaseSocialText(sim);
 }
-void Person::increaseSocialPhone(Person sim)
+void Person::increaseSocialPhone(Person &sim)
 {
     needs_cl.increaseSocialPhone(sim);
 }
@@ -153,5 +153,4 @@ Person::~Person()
     // delete[] firstName_cl;
     // delete[] lastName_cl;
     // delete[] job_cl;
-    
 }

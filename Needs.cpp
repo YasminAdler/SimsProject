@@ -30,55 +30,7 @@ void Needs::life()
     social_cl.minus1Social();
     hygiene_cl.minus1Hygiene();
 }
-/*
-Depricated
-void Needs::increseNeed(int needNumber, void *secondItem, void *thirdItem)
-{
 
-    switch (needNumber)
-    {
-    case 1:
-        bladder_cl.UseToilet();
-        break;
-    case 2:
-        hunger_cl.Eat(*(Food *)secondItem);
-        break;
-    case 3:
-        energy_cl.Sleep();
-        break;
-    case 4:
-        switch ((long long)secondItem)
-        {
-        case 1:
-            fun_cl.PlayAnimal(*(Animal *)thirdItem);
-            break;
-        case 2:
-            fun_cl.PlayComputer();
-            break;
-        case 3:
-            fun_cl.PlayGuitar();
-            break;
-        }
-        break;
-    case 5:
-        switch ((long long)secondItem)
-        {
-        case 1:
-            social_cl.PhoneCall(*(Person *)thirdItem);
-            break;
-        case 2:
-            social_cl.Talk(*(Person *)thirdItem);
-            break;
-        case 3:
-            social_cl.Text(*(Person *)thirdItem);
-            break;
-        }
-    case 6:
-        hygiene_cl.Shower();
-        break;
-    }
-}
-*/
 void Needs::increaseBladder()
 {
     bladder_cl.UseToilet();
@@ -103,19 +55,20 @@ void Needs::increaseFunAnimal(Animal animal)
 {
     fun_cl.PlayAnimal(animal);
 }
-void Needs::increaseSocialTalk(Person sim)
+void Needs::increaseSocialTalk(Person &sim)
 {
     social_cl.Talk(sim);
 }
-void Needs::increaseSocialText(Person sim)
+void Needs::increaseSocialText(Person &sim)
 {
     social_cl.Text(sim);
 }
-void Needs::increaseSocialPhone(Person sim)
+void Needs::increaseSocialPhone(Person &sim)
 {
     social_cl.PhoneCall(sim);
 }
-void Needs::increaseSocial(){
+void Needs::increaseSocial()
+{
     social_cl.increseSocial();
 }
 void Needs::increaseHygiene()
@@ -287,7 +240,7 @@ void Social::minus1Social()
     if (level_cl <= 3)
         cout << "Really need to do something social :( \n";
 }
-void Social::Talk(Person person)
+void Social::Talk(Person& person)
 {
     cout << "Talking to "
          << person.getFirstName()
@@ -297,7 +250,7 @@ void Social::Talk(Person person)
     increseSocial();
     person.increaseSocial();
 }
-void Social::Text(Person person)
+void Social::Text(Person& person)
 {
     cout << "Texting "
          << person.getFirstName()
@@ -307,7 +260,7 @@ void Social::Text(Person person)
     increseSocial();
     person.increaseSocial();
 }
-void Social::PhoneCall(Person person)
+void Social::PhoneCall(Person &person)
 {
     cout << "Calling "
          << person.getFirstName()
