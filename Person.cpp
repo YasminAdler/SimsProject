@@ -6,41 +6,6 @@ using namespace std;
 Person::Person()
 {
 }
-
-// Person::Person(char *firstName)
-// {
-//     firstName_cl = new char(strlen(firstName) + 1);
-//     strcpy(firstName_cl, firstName);
-// }
-
-// Person::Person(char *firstName, char *lastName)
-// {
-//     firstName_cl = new char(strlen(firstName) + 1);
-//     strcpy(firstName_cl, firstName);
-//     lastName_cl = new char(strlen(lastName) + 1);
-//     strcpy(lastName_cl, lastName);
-// }
-
-// Person::Person(char *firstName, char *lastName, Needs* need)
-// {
-//     firstName_cl = new char(strlen(firstName) + 1);
-//     strcpy(firstName_cl, firstName);
-
-//     lastName_cl = new char(strlen(lastName) + 1);
-//     strcpy(lastName_cl, lastName);
-//     needs_cl = need;
-// }
-
-// Person::Person(char *firstName, char *lastName, Needs* need, Job* job) {
-//         firstName_cl = new char(strlen(firstName) + 1);
-//     strcpy(firstName_cl, firstName);
-
-//     lastName_cl = new char(strlen(lastName) + 1);
-//     strcpy(lastName_cl, lastName);
-//     needs_cl = need;
-//     job_cl = job;
-// }
-
 void Person::setFirstName(char *FirstName)
 {
     firstName_cl = new char[strlen(FirstName)] + 1;
@@ -105,18 +70,6 @@ char *Person::getLastName()
 {
     return lastName_cl;
 }
-/*
-Depritiated
-void Person::increseNeed(int needNumber, void *secondItem, void *thirdItem)
-{
-    needs_cl.increseNeed(needNumber, secondItem, thirdItem);
-}
-*/
-// Needs *Person::getNeeds()
-// {
-//    return &needs_cl;
-//
-
 void Person::setJob(Job job)
 {
     // job_cl = new Job[sizeof(job)];
@@ -135,18 +88,6 @@ void Person::printNeeds()
 {
     needs_cl.printNeeds();
 }
-
-// Person::Person(const Person &t)
-// {
-//     firstName_cl = new char[sizeof(t.firstName_cl) + 1];
-//     strcpy(firstName_cl, t.firstName_cl);
-
-//     lastName_cl = new char[sizeof(t.lastName_cl) + 1];
-//     strcpy(lastName_cl, t.lastName_cl);
-//     cout << "Copy Constructor\n";
-
-//     //didn't add the job copy constructor yet!!
-// }
 
 Person::~Person()
 {

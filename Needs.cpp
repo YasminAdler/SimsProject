@@ -223,7 +223,7 @@ void Hygiene::minus1Hygiene()
     if (level_cl > 0)
         level_cl--;
     if (level_cl <= 3)
-        cout << "Really need to do something fun :( \n";
+        cout << "Really need to shower :( \n";
 }
 
 Social::Social()
@@ -238,7 +238,7 @@ void Social::minus1Social()
     if (level_cl > 0)
         level_cl--;
     if (level_cl <= 3)
-        cout << "Really need to do something social :( \n";
+        cout << "Really need to socialize :( \n";
 }
 void Social::Talk(Person& person)
 {

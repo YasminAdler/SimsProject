@@ -6,28 +6,6 @@
 
 class Person;
 
-enum social
-{
-    talk = 1,
-    text,
-    phoneCall
-};
-enum needNumber
-{
-    bladder = 1,
-    hunger,
-    energy,
-    fun,
-    social,
-    hygiene
-};
-enum fun
-{
-    playGuitar = 1,
-    playComputer,
-    playAnimal
-};
-
 class Bladder
 {
 private:

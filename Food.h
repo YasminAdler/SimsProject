@@ -11,8 +11,6 @@ private:
 public:
     Food();
     Food(char* name);
-    // Food(char* name, int worth);
-    // Food(char* name, int worth, bool HaveToBeCooked);
     ~Food(){};
 
 };

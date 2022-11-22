@@ -1,14 +1,4 @@
 /*Problems:
-
-    2 Writing chars instead of numbers makes it go crazy or exits depending on where it was done - almost fixed
-    3 Attemptig to control sim crashes program - almost fixed see 6 - Fixed
-    4 in case 3 write a message at first if there are no sims to control - Done
-
-    6 PlayAnimal crashes - fixed
-
-    8 Social gets error message "error you shouldn't get this messege line: 157" - can't recreate - fixed
-
-    11 Social also increaces Hygiene - fixed
     12 want to change to referance wherever possible
 
 */
@@ -17,17 +7,38 @@
 using namespace std;
 #include "Person.h"
 
-enum choices{
+enum choices
+{
     exitGame,
     addSim,
     deleteSim,
     controlSim
 };
+enum social
+{
+    talk = 1,
+    text,
+    phoneCall
+};
+enum needNumber
+{
+    bladder = 1,
+    hunger,
+    energy,
+    fun,
+    social,
+    hygiene
+};
+enum fun
+{
+    playGuitar = 1,
+    playComputer,
+    playAnimal
+};
 
 // Prints sim name
 void printSimName(Person &Sim)
 {
-    // cout << __LINE__ << __func__ << __func__ << " here\n";
     cout << Sim.getFirstName()
          << " "
          << Sim.getLastName();
@@ -184,9 +195,7 @@ void life(Person *simArray, int simArraySize)
 {
     for (int i = 0; i < simArraySize; i++)
     {
-        // cout << __LINE__ << __func__ << __func__ << " here\n";
         (*(simArray + i)).life();
-
         if ((*(simArray + i)).CheckIfDead())
         {
             printSimName(*(simArray + i));
@@ -194,16 +203,11 @@ void life(Person *simArray, int simArraySize)
         }
         else
         {
-            // cout << __LINE__ << __func__ << __func__ << " here\n";
             printSimName((*(simArray + i)));
             cout << " stats:\n";
-            // cout << __LINE__ << __func__ << __func__ << " here\n";
-
             (*(simArray + i)).printNeeds();
-            // cout << __LINE__ << __func__ << __func__ << " here\n";
         }
     }
-    // cout << __LINE__ << __func__ << __func__ << "  here\n";
 }
 
 int main()
@@ -270,8 +274,6 @@ int main()
             buff[0] = '\0';
             strcpy(buff, PerArr[simCounter].getLastName());
             cout << buff << " was added \n\n";
-
-            // simCounter++ was here but it encreases the counter by 2 for every new sim so I deleted it
 
             // setting that sim's job:
             do

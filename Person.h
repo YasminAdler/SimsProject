@@ -15,11 +15,6 @@ private:
 
 public:
     Person();
-    // Person(char *firstName);
-    // Person(char *firstName, char *lastName);
-    // Person(char *firstName, char *lastName, Needs* need);
-    // Person(char *firstName, char *lastName, Needs* need, Job* job);
-    // Person(const Person &t);
     void setFirstName(char *FirstName);
     void setLastName(char *LastName);
     void setJob(Job job);
@@ -42,8 +37,6 @@ public:
     void life();
     bool CheckIfDead();
     void printNeeds();
-    // Person &operator<<(Person &Sim);//cant figur this out
-    // Needs *getNeeds();
 
     ~Person();
 };
