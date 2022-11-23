@@ -328,10 +328,9 @@ int main()
                 if (delSIm < 0 || delSIm > simCounter)
                     cout << "Not a valid option\n";
             } while (delSIm < 0 || delSIm > simCounter);
-            // cout << "Sim counter:" << simCounter<< "\n";
+            
             if (delSIm == simCounter)
             {
-                // PerArr[simCounter].~Person();
                 simCounter--;
                 break;
             }
@@ -341,7 +340,6 @@ int main()
             {
                 PerArr[c] = PerArr[c + 1];
             }
-            // PerArr[simCounter - 1].~Person();
             simCounter--;
             break;
         case controlSim:
