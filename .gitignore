@@ -1,4 +1,6 @@
-.vscode
-.vs
-.obj
+*.vscode
+*.vs
 *.obj
+*.ilk
+*.pdb
+*.exe

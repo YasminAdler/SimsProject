@@ -61,5 +61,6 @@ void Job::setJobDaylyWorkHours(int workingHrs)
 
 Job::~Job()
 {
-    delete[] title_cl;
+    if (title_cl)
+        delete[] title_cl;
 }

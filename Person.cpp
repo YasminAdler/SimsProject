@@ -8,13 +8,12 @@ Person::Person()
 }
 void Person::setFirstName(char *FirstName)
 {
-    firstName_cl = new char[strlen(FirstName)] + 1;
+    firstName_cl = new char[strlen(FirstName) + 1];
     strcpy(firstName_cl, FirstName);
 }
 void Person::setLastName(char *LastName)
 {
     lastName_cl = new char[strlen(LastName) + 1];
-
     strcpy(lastName_cl, LastName);
 }
 void Person::increaseBladder()
@@ -90,6 +89,8 @@ void Person::printNeeds()
 
 Person::~Person()
 {
-    delete firstName_cl;
-    delete lastName_cl;
+    if (firstName_cl)
+        delete[] firstName_cl;
+    if (lastName_cl)
+        delete[] lastName_cl;
 }
