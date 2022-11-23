@@ -90,4 +90,6 @@ void Person::printNeeds()
 
 Person::~Person()
 {
+    delete firstName_cl;
+    delete lastName_cl;
 }
