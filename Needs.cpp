@@ -83,7 +83,8 @@ void Needs::printNeeds()
          << "Energy\t" << energy_cl.get_level() << "\n"
          << "Fun\t" << fun_cl.get_level() << "\n"
          << "Social\t" << social_cl.get_level() << "\n"
-         << "Hygiene\t" << hygiene_cl.get_level() << "\n";
+         << "Hygiene\t" << hygiene_cl.get_level() << "\n"
+         << "\n";
 }
 Bladder::Bladder()
 {
