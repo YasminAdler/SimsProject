@@ -2,6 +2,12 @@
     12 want to change to referance wherever possible
 
 */
+// // for debug perpasses:
+// #define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+// //till here
+
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -330,7 +336,7 @@ int main()
             // cout << "Sim counter:" << simCounter<< "\n";
             if (delSIm == simCounter)
             {
-                PerArr[simCounter].~Person();
+                // PerArr[simCounter].~Person();
                 simCounter--;
                 break;
             }
@@ -340,7 +346,7 @@ int main()
             {
                 PerArr[c] = PerArr[c + 1];
             }
-            PerArr[simCounter - 1].~Person();
+            // PerArr[simCounter - 1].~Person();
             simCounter--;
             break;
         case controlSim:
@@ -364,5 +370,6 @@ int main()
             break;
         }
     }
+    _CrtDumpMemoryLeaks();
     return 0;
 }
