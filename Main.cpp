@@ -1,7 +1,3 @@
-/*Problems:
-    12 want to change to referance wherever possible
-
-*/
 #include <iostream>
 #include <cstring>
 using namespace std;

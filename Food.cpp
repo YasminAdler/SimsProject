@@ -2,6 +2,6 @@
 using namespace std;
 #include "Food.h"
 
-    Food::Food(char* name){
-        
-    }
+Food::Food(char *name)
+{
+}

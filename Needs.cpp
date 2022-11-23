@@ -2,7 +2,6 @@
 using namespace std;
 #include "Needs.h"
 #include "Person.h"
-// class Person;
 
 Needs::Needs() : bladder_cl{},
                  hunger_cl{},
@@ -241,7 +240,7 @@ void Social::minus1Social()
     if (level_cl <= 3)
         cout << "Really need to socialize :( \n";
 }
-void Social::Talk(Person& person)
+void Social::Talk(Person &person)
 {
     cout << "Talking to "
          << person.getFirstName()
@@ -251,7 +250,7 @@ void Social::Talk(Person& person)
     increseSocial();
     person.increaseSocial();
 }
-void Social::Text(Person& person)
+void Social::Text(Person &person)
 {
     cout << "Texting "
          << person.getFirstName()

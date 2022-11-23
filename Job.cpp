@@ -39,7 +39,6 @@ void Job::setJobTitle(char *jobTitle)
 {
     title_cl = new char[strlen(jobTitle) + 1];
     strcpy(title_cl, jobTitle);
-    // title_cl = strdup(jobTitle);
 }
 
 int Job::getJobSalary()

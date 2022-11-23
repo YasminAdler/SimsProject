@@ -10,9 +10,8 @@ private:
 
 public:
     Food();
-    Food(char* name);
+    Food(char *name);
     ~Food(){};
-
 };
 
 #endif
