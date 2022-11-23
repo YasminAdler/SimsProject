@@ -2,12 +2,6 @@
     12 want to change to referance wherever possible
 
 */
-// // for debug perpasses:
-// #define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-// //till here
-
 #include <iostream>
 #include <cstring>
 using namespace std;
@@ -371,6 +365,5 @@ int main()
             break;
         }
     }
-    _CrtDumpMemoryLeaks();
     return 0;
 }
