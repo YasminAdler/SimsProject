@@ -204,6 +204,7 @@ void life(Person *simArray, int simArraySize)
         (*(simArray + i)).life();
         if ((*(simArray + i)).CheckIfDead())
         {
+            cout << "\n";
             printSimName(*(simArray + i));
             cout << " is dead!\n";
         }
